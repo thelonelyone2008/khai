@@ -26,6 +26,7 @@ export interface ChatMessage {
   role: 'user' | 'model';
   parts: Part[];
   isStreaming?: boolean; // True if the message is actively being streamed
+  learningMode?: LearningMode; // The type of learning mode for this message
 }
 
 export interface UploadedFile {

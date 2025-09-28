@@ -142,9 +142,10 @@ const ChatMessageContent: React.FC<{ part: Part, isStreaming?: boolean }> = ({ p
 const ChatMessageComponent: React.FC<{ message: ChatMessage }> = ({ message }) => {
   const isUser = message.role === 'user';
   const bubbleClasses = isUser
-    ? 'bg-blue-600 text-white self-end'
-    : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 self-start';
+    ? 'bg-blue-600 text-white self-end max-w-[85%] md:max-w-[70%]'
+    : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 self-start max-w-[85%] md:max-w-[70%]';
   const containerClasses = isUser ? 'justify-end' : 'justify-start';
+  const messageTypeClasses = isUser ? '' : `before:content-['${message.learningMode === 'solve_socratic' ? 'Hướng dẫn từng bước' : message.learningMode === 'solve_final_answer' ? 'Đáp án' : 'Lời giải chi tiết'}'] before:text-xs before:text-gray-500 dark:before:text-gray-400 before:mb-1 before:block`;
 
   return (
     <div className={`flex ${containerClasses} mb-4`}>
@@ -153,7 +154,7 @@ const ChatMessageComponent: React.FC<{ message: ChatMessage }> = ({ message }) =
                 <NovaIcon className="w-7 h-7 text-white" />
             </div>
         )}
-      <div className={`max-w-2xl p-4 rounded-2xl shadow font-sans ${bubbleClasses}`}>
+      <div className={`p-4 rounded-2xl shadow font-sans ${bubbleClasses} ${messageTypeClasses}`}>
         {message.parts.map((part, index) => (
           <ChatMessageContent key={index} part={part} isStreaming={message.isStreaming} />
         ))}

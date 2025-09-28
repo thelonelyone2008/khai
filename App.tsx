@@ -281,7 +281,8 @@ const App: React.FC = () => {
         id: modelMessageId,
         role: 'model',
         parts: [{ text: '' }],
-        isStreaming: true
+        isStreaming: true,
+        learningMode: mode
     };
     setMessages(prev => [...prev, newModelMessage]);
     
@@ -382,9 +383,18 @@ const App: React.FC = () => {
     setIsAwaitingChoice(false);
     setLearningMode(selectedMode);
     
-    const choiceText = selectedMode === 'solve_socratic'
-        ? 'Hướng dẫn tôi từng bước.'
-        : 'Cho tôi xem lời giải chi tiết.';
+    let choiceText = '';
+    switch (selectedMode) {
+      case 'solve_socratic':
+        choiceText = 'Hướng dẫn tôi từng bước.';
+        break;
+      case 'solve_final_answer':
+        choiceText = 'Cho tôi xem đáp án';
+        break;
+      default:
+        choiceText = 'Cho tôi xem lời giải chi tiết.';
+        break;
+    };
     const choiceMessage: ChatMessage = { role: 'user', parts: [{ text: choiceText }] };
     
     const historyForApi = [...messages];
