@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import ChatInput from './components/ChatInput';
 import ChatMessageComponent from './components/ChatMessage';
 import Header from './components/Header';
-import { NovaIcon, PencilIcon, LightningBoltIcon } from './components/Icons';
+import { NovaIcon, PencilIcon, LightningBoltIcon, TargetIcon } from './components/Icons';
 import { EducationalStage, DifficultyLevel, ChatMessage, UploadedFile, Part, LearningMode, Theme } from './types';
 import { generateResponseStream, generateImage } from './services/geminiService';
 import StartScreen from './components/StartScreen';
@@ -45,6 +45,14 @@ const ChoiceSelector: React.FC<{ onSelect: (mode: LearningMode) => void; isLoadi
             >
                 <LightningBoltIcon className="w-5 h-5" />
                 <span>Xem lời giải chi tiết</span>
+            </button>
+            <button
+                onClick={() => onSelect('solve_final_answer')}
+                disabled={isLoading}
+                className="flex w-full sm:w-auto items-center justify-center gap-3 px-5 py-3 bg-teal-600 text-white rounded-full font-semibold shadow-md hover:bg-teal-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+                <TargetIcon className="w-5 h-5" />
+                <span>Chỉ xem đáp án</span>
             </button>
         </div>
       </div>

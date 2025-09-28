@@ -9,7 +9,7 @@ export enum DifficultyLevel {
   Advanced = 'Nâng cao',
 }
 
-export type LearningMode = 'solve_socratic' | 'solve_direct' | 'review';
+export type LearningMode = 'solve_socratic' | 'solve_direct' | 'review' | 'solve_final_answer';
 
 export type Theme = 'light' | 'dark' | 'system';
 
